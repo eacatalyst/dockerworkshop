@@ -1,6 +1,7 @@
+# Exercise 3.01: Working with Docker Image Layers
 FROM basic-base
 
-CMD mkdri -p /var/www/html
+CMD mkdir -p /var/www/html/
 
 WORKDIR /var/www/html/
 

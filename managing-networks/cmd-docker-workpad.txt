@@ -1,0 +1,118 @@
+
+
+docker system df
+
+docker system df -v
+
+docker ps -a --filter volume=db
+
+docker container commit c1 newimage
+
+docker image inspect newimage --format={{.ContainerConfig.Volumes}}
+
+docker container rm -f $(docker container ls -aq)
+
+docker events --format '{{json .}}'.
+
+docker container run -d -v /var/mylogs:/var/log/nginx nginx
+
+
+
+174b5de99b0c2aa3c2d0043aa44d3e2b50da4d8b
+
+Lampard#8
+DockerAdmin1
+
+
+docker network connect ps-bridge ctr1
+
+docker network create   \
+--driver overlay        \
+--subnet=10.11.0.0/24   \
+--gateway=10.11.0.2     \
+ps-overlay1
+
+docker service create \
+--name ps-svc         \
+--replicas=1          \
+--network ps-overlay1 \
+alpine sleep inifinity
+
+
+docker service ps
+
+docker service create --mode=global --name=web2 nginx --network ps-overlay1
+
+docker service create --mode=global --name=web2  --network ps-overlay1  nginx
+
+docker service create --replicas=3  --name=ps-svc --network=ps-overlay1 nginx
+
+docker service create --replicas=3  --name=ps-svc --network=ps-overlay1 alpine sleep infinity
+
+ifconfig enp7s0 promisc
+
+docker network create -d macvlan \
+--subnet=192.168.50.0/24 \
+--ip-range=192.168.50.210/29 \
+--aux-address='docker-1=192.168.50.101' \
+--aux-address='docker-2=192.168.50.102' \
+--aux-address='docker-3=192.168.50.103' \
+--aux-address='docker-3=192.168.50.103' \
+-o parent=enp7s0 \
+ps-mac
+
+docker network create -d macvlan --subnet=100.98.26.43/24 --gateway=100.98.26.1  -o parent=eth0 pub_net
+
+ip link add mac0 link enp7s0 type macvlan mode bridge
+
+
+# ipvlan-network 01/23/2022 - must use bond
+
+docker network create -d ipvlan \
+--subnet=192.168.50.0/24 \
+--ip-range=192.168.50.210/29 \
+--aux-address='docker-1=192.168.50.101' \
+--aux-address='docker-2=192.168.50.102' \
+--aux-address='docker-3=192.168.50.103' \
+--aux-address='docker-3=192.168.50.103' \
+-o parent=bond0  \
+-o ipvlan_mode=l2 \
+ps-ip
+
+
+docker container run -dit --name test --network ps-ip --ip=192.168.50.214 alpine ash
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

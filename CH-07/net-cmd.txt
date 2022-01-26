@@ -1,0 +1,5 @@
+docker system df
+
+docker system df -v
+
+docker ps -a --filter volume=db

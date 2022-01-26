@@ -1,0 +1,32 @@
+https://github.com/devplayer0/docker-net-dhcp
+
+docker plugin install ghcr.io/devplayer0/docker-net-dhcp:release-linux-amd64
+
+
+sudo ip link add cont-bridge type bridge
+sudo ip link set cont-bridge up
+
+
+sudo ip link set enp1s0 up
+
+sudo ip link set enp7s0 up
+
+sudo ip link set enp7s0 master cont-bridge
+
+sudo dhcpcd cont-bridge
+
+docker network create -d \
+ghcr.io/devplayer0/docker-net-dhcp:release-linux-amd64 \
+--ipam-driver null \
+-o bridge=cont-bridge cmd-dhcp-net 
+
+
+docker run -itd --name macvlan1 --network cmd-dhcp-net alpine:latest
+
+ifconfig enp7s0 –promisc
+
+ip link set [interface] promisc on
+
+ip link set ovirtmgmt promisc on
+
+ovirtmgmt:

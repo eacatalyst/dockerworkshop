@@ -1,0 +1,8 @@
+Error response from daemon: could not choose an IP address to advertise since this system has multiple addresses on different interfaces (10.1.10.103 on enp1s0 and 192.168.50.101 on enp7s0) - specify one with --advertise-addr
+
+
+docker swarm init --advertise-addr=192.168.50.101
+
+docker swarm join --token SWMTKN-1-5qvhpk96itgbkt8m0gyv6pikd6owgdhlsoin5rguifynijogqf-00zj0a364fmy249efe2j9so9m 192.168.50.101:2377
+
+https://pimylifeup.com/ubuntu-20-04-static-ip-address/

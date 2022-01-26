@@ -1,0 +1,38 @@
+
+
+du -sh /var/lib/docker/overlay2/
+docker rmi -f $(docker images -a -q)
+
+docker build -t basic-app:$(git log -1 --format=%h) .  -f Dockerfile_ver1 
+
+
+docker build -t basic-app:$(git log -1 --format=%h) .  -f Dockerfile_ver1
+
+docker run -d -p 5000:5000 --restart=always --name registry registry --volume reg-vol:/home/datahawk/docker_registry:rw --name registry
+
+docker push dev.docker.local:5000/basic-app:ver1
+
+# Local Registry
+
+
+run -d -p 5000:5000 --restart always --name registry registry:2 --volume reg-vol:/home/datahawk/docker_registry
+
+docker run -d -p 5000:5000 --restart always --name registry registry:2 --volume reg-vol:/home/datahawk/docker_registry
+
+docker run -d -p 5000:5000 --restart=always --volume /home/datahawk/docker_registry:/var/lib/registry:rw --name registry
+
+docker run -d -p 5000:5000 --restart always --name registry registry:2 --volume /home/datahawk/docker_registry:/var/lib/registry:rw
+
+docker run -d \
+  -p 5000:5000 \
+  --restart=always \
+  --name registry \
+  -v /mnt/registry:/var/lib/registry \
+  registry:2
+
+  docker run -d \
+  -p 5000:5000 \
+  --restart=always \
+  --name registry \
+  -v /home/datahawk/docker_registry:/var/lib/registry \
+  registry:2

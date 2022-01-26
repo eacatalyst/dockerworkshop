@@ -1,0 +1,6 @@
+FROM golang:latest
+WORKDIR /myapp
+COPY welcome.go .
+COPY go.mod .
+RUN go build -o welcome .
+ENTRYPOINT ["./welcome"]

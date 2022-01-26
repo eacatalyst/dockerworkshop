@@ -1,0 +1,18 @@
+https://www.youtube.com/watch?v=v0me2svkiIg
+https://fucking-it.com/articles/ubuntu/562-ubuntu-configure-link-aggregation-lacp
+
+auto lo
+iface lo inet loopback
+
+auto enp7s0
+iface enp7s0 inet manual
+bond-master bond0
+
+auto enp1s0
+iface enp1s0 inet manual
+bond-master bond0
+
+auto bond0
+iface bond0 inet dhcp
+bond-mode 4
+bond-slaves enp1s0 enp7s0
